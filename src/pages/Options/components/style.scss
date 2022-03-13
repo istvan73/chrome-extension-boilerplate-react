@@ -3,8 +3,22 @@
   flex-direction: column;
 
   .save-button {
+    margin-top: 12px;
     width: 100%;
     background-color: #f04c00;
     border-color: #cc521a;
+
+    &.disabled {
+      background-color: #797979;
+      border-color: #808080;
+      cursor: default;
+    }
+  }
+
+  .reset-button {
+    margin-top: 50px;
+    width: 100%;
+    background-color: #a3a3a3;
+    border-color: #b9b9b9;
   }
 }

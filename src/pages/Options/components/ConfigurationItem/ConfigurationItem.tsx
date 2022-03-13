@@ -27,6 +27,7 @@ const ConfigurationItem: React.FC<ConfigurationItemProps> = ({
   max,
   suffix,
   scale,
+  step,
 }) => {
   const [sidesSettingsPopupShown, setSidesSettingsPopupShown] = useState(false);
 
@@ -43,16 +44,16 @@ const ConfigurationItem: React.FC<ConfigurationItemProps> = ({
           <SliderWithTooltip
             onChange={handleChange}
             tipFormatter={(value) => {
-              return `${(scale ? scale * value : value).toFixed(2)}${
-                suffix ?? ''
-              }`;
+              return `${(scale ? scale * value : value).toFixed(
+                step?.toString() === step?.toFixed() ? 0 : 2
+              )}${suffix ?? ''}`;
             }}
             value={fields}
             trackStyle={{ backgroundColor: 'rgb(255, 150, 102)' }}
             handleStyle={{ borderColor: 'rgb(255, 150, 102)' }}
             min={min}
             max={max}
-            step={isNil(max) || isNil(min) ? undefined : (max - min) / 100}
+            step={step}
           />
         );
       case 'boolean':
@@ -72,14 +73,15 @@ const ConfigurationItem: React.FC<ConfigurationItemProps> = ({
                 title={title}
                 suffix={suffix}
                 scale={scale}
+                step={step}
               />
             )}
             <div className="side-settings-container">
               <div className="side-setting-values">
                 {map(fields, (fieldValue, fieldName) => (
-                  <>
+                  <span key={fieldName}>
                     {`${fieldName}`}:<i>{` ${fieldValue}; `}</i>
-                  </>
+                  </span>
                 ))}
               </div>
               <button

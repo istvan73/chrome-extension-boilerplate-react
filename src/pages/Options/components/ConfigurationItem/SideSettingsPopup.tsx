@@ -22,10 +22,9 @@ const SideSettingsPopup: React.FC<SideSettingsPopupProps> = ({
   title,
   suffix,
   scale,
+  step,
 }) => {
   const [localSideValues, setLocalSideValues] = useState(sideValues);
-
-  const step = isNil(max) || isNil(min) ? undefined : (max - min) / 100;
 
   return open ? (
     <div
@@ -36,8 +35,10 @@ const SideSettingsPopup: React.FC<SideSettingsPopupProps> = ({
         if (target.id === 'side-settings-backdrop') onClose();
       }}
     >
-      <div className="side-settings-popup-title">{title}</div>
       <div className="side-settings-popup-component">
+        <div className="side-settings-popup-title">
+          <h2>{title}</h2>
+        </div>
         {map(sideValues, (_, sideName) => (
           <div className="side-setting-item" key={sideName}>
             <div className="side-setting-title">{sideName}</div>

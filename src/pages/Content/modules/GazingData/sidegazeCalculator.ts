@@ -1,11 +1,6 @@
 import { map, mapValues, reduce } from 'lodash';
 import { SideType } from '../../../../icons/DownIcon';
-import {
-  cooldownTimeMs,
-  intensivityThresholds,
-  positiveScoreThresholdLines,
-  punishmentDivider,
-} from '../configurationProvider';
+import { getConfig } from '../configurationProvider';
 
 const gazePredictionScores: { [side: string]: number } = {
   top: 0,
@@ -56,7 +51,8 @@ const getAdjustedSideScores = (
   side: SideType
 ) => {
   let res = 0;
-  const activeInterval = wholeInterval * positiveScoreThresholdLines[side];
+  const activeInterval =
+    wholeInterval * getConfig().positiveScoreThresholdLines[side];
 
   if (sideProximity <= activeInterval) {
     res = (activeInterval - sideProximity) / activeInterval;
@@ -65,7 +61,7 @@ const getAdjustedSideScores = (
       sideProximity >= 3 * activeInterval
         ? 1
         : (sideProximity - activeInterval) / (2 * activeInterval);
-    res = -res / punishmentDivider[side];
+    res = -res / getConfig().punishmentDivider[side];
   }
 
   return res;
@@ -158,7 +154,9 @@ const getSideDistinctionPunishmentScore = (
   return reduce(
     neighbourKeys,
     (acc, currentNeighbourKey) =>
-      acc + adjustedScores[currentNeighbourKey] / 10,
+      acc +
+      adjustedScores[currentNeighbourKey] *
+        getConfig().sidegazeDistinctionCoefficient[currentNeighbourKey],
     0
   );
 };
@@ -180,7 +178,8 @@ export const calculateSideGazeScores = (coordinates: number[]) => {
 
       // *If we are over the threshold for the first time
       if (
-        gazePredictionScores[key] > intensivityThresholds[key as SideType] &&
+        gazePredictionScores[key] >
+          getConfig().intensityThresholds[key as SideType] &&
         gazePredictionResetTimouts[key as SideType] === undefined
       ) {
         isSideLocked[key as SideType] = true;
@@ -192,11 +191,9 @@ export const calculateSideGazeScores = (coordinates: number[]) => {
           gazePredictionScores[key] = 0;
           gazePredictionResetTimouts[key as SideType] = undefined;
           console.log({ msg: 'resetting', side: key });
-        }, cooldownTimeMs);
+        }, getConfig().cooldownTimeMs);
       }
     }
-
-    console.log({ cooldownTimeMs });
 
     return mapValues(gazePredictionScores, (gazePrediction) =>
       (gazePrediction / 10).toFixed()

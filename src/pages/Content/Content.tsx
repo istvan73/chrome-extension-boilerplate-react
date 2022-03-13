@@ -53,7 +53,9 @@ const Content = () => {
     );
 
     chrome.storage.onChanged.addListener((changes) => {
-      const { newValue } = changes[StorageItemNamspaces.POPUP_CONFIGURATION];
+      const currentChange = changes[StorageItemNamspaces.POPUP_CONFIGURATION];
+      const newValue = currentChange ? currentChange['newValue'] : undefined;
+
       if (JSON.stringify(newValue) !== JSON.stringify(configuration)) {
         setConfiguration(newValue);
       }
@@ -81,7 +83,6 @@ const Content = () => {
       'sidegazeScoresChanged',
       (e: CustomEventInit) => {
         const gazeScores = e.detail as SideScoreType;
-        // console.log({ gazeScores });
         setSidePercentages(gazeScores);
       },
       false

@@ -7,6 +7,7 @@ export type ConfigurationItemType = {
   max?: number;
   suffix?: string;
   scale?: number;
+  step?: number;
 };
 
 type ConfigurationType = {
@@ -24,6 +25,7 @@ const configuration: ConfigurationType = {
     title: 'Intensity Thresholds',
     min: 500,
     max: 2000,
+    step: 10,
   },
   positiveScoreThresholdLines: {
     value: {
@@ -37,6 +39,7 @@ const configuration: ConfigurationType = {
     max: 0.5,
     suffix: '%',
     scale: 100,
+    step: 0.05,
   },
   punishmentDivider: {
     value: {
@@ -48,6 +51,7 @@ const configuration: ConfigurationType = {
     title: 'Punishment Divider',
     min: 1,
     max: 5,
+    step: 0.5,
     // Todo: validate above
   },
   cooldownTimeMs: {
@@ -56,6 +60,7 @@ const configuration: ConfigurationType = {
     min: 1000,
     max: 10000,
     suffix: 'ms',
+    step: 500,
   },
   gazeCoordinateBulkingLimit: {
     value: 10,
@@ -63,6 +68,7 @@ const configuration: ConfigurationType = {
     min: 2,
     max: 50,
     suffix: ' measurement/calculation',
+    step: 1,
   },
   sidegazeDistinctionCoefficient: {
     value: {
@@ -76,6 +82,7 @@ const configuration: ConfigurationType = {
     max: 1,
     suffix: '%',
     scale: 100,
+    step: 0.05,
   },
 };
 

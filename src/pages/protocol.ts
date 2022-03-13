@@ -1,5 +1,4 @@
 import { ConfigurationFieldType } from './Options/components/ConfigurationItem/ConfigurationItem';
-import { SideSelectionOption } from './Popup/components/PopupContent';
 
 export type CommandType = 'START_ALGO_TRAIN' | 'SET_CONFIGURATION';
 

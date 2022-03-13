@@ -4,12 +4,28 @@ import {
   OptionsConfigurationStorage,
   StorageItemNamspaces,
 } from '../../protocol';
+import { SideScoreType } from '../Content';
+
+export type ConfigurationModel = {
+  intensityThresholds: SideScoreType;
+  positiveScoreThresholdLines: SideScoreType;
+  punishmentDivider: SideScoreType;
+  cooldownTimeMs: number;
+  gazeCoordinateBulkingLimit: number;
+  sidegazeDistinctionCoefficient: SideScoreType;
+};
 
 let configurationValues = mapValues(configuration, ({ value }) => value);
 
 chrome.storage.onChanged.addListener((changes) => {
-  const { newValue } = changes[StorageItemNamspaces.OPTIONS_CONFIGURATION];
-  if (JSON.stringify(newValue) !== JSON.stringify(configurationValues)) {
+  const currentChange = changes[StorageItemNamspaces.OPTIONS_CONFIGURATION];
+
+  const newValue = currentChange ? currentChange['newValue'] : undefined;
+
+  if (
+    !!newValue &&
+    JSON.stringify(newValue) !== JSON.stringify(configurationValues)
+  ) {
     configurationValues = newValue as OptionsConfigurationStorage;
   }
 });
@@ -22,7 +38,8 @@ chrome.storage.sync.get(
     ] as OptionsConfigurationStorage;
 
     configurationValues = newConfig;
+    console.log({ newConfig });
   }
 );
 
-export default configurationValues;
+export const getConfig = () => configurationValues as ConfigurationModel;

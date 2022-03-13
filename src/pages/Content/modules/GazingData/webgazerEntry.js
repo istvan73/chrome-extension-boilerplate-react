@@ -1,6 +1,6 @@
 import { webgazer } from './webgazer2';
 import { calculateSideGazeScores } from './sidegazeCalculator';
-import { gazeCoordinateBulkingLimit } from '../configurationProvider';
+import { getConfig } from '../configurationProvider';
 
 let bulkedGazeData = [];
 const getBulkedCoordinates = (gazeDataset) => {
@@ -36,7 +36,7 @@ export const initializeWebgazer = () => {
           ? window.innerHeight
           : data.y;
 
-      if (bulkedGazeData.length < gazeCoordinateBulkingLimit) {
+      if (bulkedGazeData.length < getConfig().gazeCoordinateBulkingLimit) {
         bulkedGazeData.push([adjustedX, adjustedY]);
       } else {
         const bulkedCoodrinates = getBulkedCoordinates(bulkedGazeData);
@@ -46,7 +46,6 @@ export const initializeWebgazer = () => {
           { detail: sideGazeScores }
         );
         eventHostElement.dispatchEvent(sidegazeScoresChangedEvent);
-        // console.log({ sideGazeScores });
         bulkedGazeData = [[adjustedX, adjustedY]];
       }
     })
