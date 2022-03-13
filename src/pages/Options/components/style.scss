@@ -1,0 +1,10 @@
+.configuration-container {
+  display: flex;
+  flex-direction: column;
+
+  .save-button {
+    width: 100%;
+    background-color: #f04c00;
+    border-color: #cc521a;
+  }
+}

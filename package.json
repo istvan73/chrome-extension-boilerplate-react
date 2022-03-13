@@ -1,12 +1,8 @@
 {
-  "name": "chrome-extension-boilerplate-react",
-  "version": "4.2.0",
-  "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
+  "name": "i-control",
+  "version": "0.1.0",
+  "description": "A chrome extension that lets you control the scrollbars on any page with your eyes. #freeSuperPower",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lxieyang/chrome-extension-boilerplate-react.git"
-  },
   "scripts": {
     "build": "node utils/build.js",
     "start": "node utils/webserver.js",
@@ -14,9 +10,14 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.1",
+    "@types/lodash": "^4.14.178",
+    "lodash": "^4.17.21",
+    "rc-progress": "^3.2.4",
+    "rc-slider": "^9.7.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hot-loader": "^4.13.0"
+    "react-hot-loader": "^4.13.0",
+    "react-select": "^5.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",

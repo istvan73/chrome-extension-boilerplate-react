@@ -1,0 +1,9 @@
+$theme-colors: (
+  'secondary': rgb(255, 150, 102),
+);
+
+:export {
+  @each $key, $value in $theme-colors {
+    #{unquote($key)}: $value;
+  }
+}

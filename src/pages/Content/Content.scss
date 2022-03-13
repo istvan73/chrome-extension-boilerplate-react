@@ -1,0 +1,15 @@
+.i-control-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+
+  .target {
+    background-color: rgb(255, 81, 0);
+    box-shadow: 0 0 20px rgba(255, 81, 0, 0.7), 0 0 40px rgba(255, 81, 0, 0.8),
+      0 0 60px rgb(255, 81, 0), 0 0 80px rgb(255, 81, 0),
+      0 0 0 4px rgba(255, 81, 0, 0.2), 0 0 0 8px rgba(255, 81, 0, 0.1);
+  }
+}
