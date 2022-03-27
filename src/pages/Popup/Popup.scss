@@ -67,6 +67,11 @@
   flex-direction: column;
   margin-bottom: 16px;
 
+  &.single-row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   .input-group-title {
     font-family: sans-serif;
     line-height: 16px;

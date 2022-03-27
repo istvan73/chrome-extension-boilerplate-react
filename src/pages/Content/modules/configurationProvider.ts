@@ -4,7 +4,7 @@ import {
   OptionsConfigurationStorage,
   StorageItemNamspaces,
 } from '../../protocol';
-import { SideScoreType } from '../Content';
+import { SideScoreType } from '../Content.component';
 
 export type ConfigurationModel = {
   intensityThresholds: SideScoreType;
@@ -13,6 +13,7 @@ export type ConfigurationModel = {
   cooldownTimeMs: number;
   gazeCoordinateBulkingLimit: number;
   sidegazeDistinctionCoefficient: SideScoreType;
+  scrollAmount: SideScoreType;
 };
 
 let configurationValues = mapValues(configuration, ({ value }) => value);

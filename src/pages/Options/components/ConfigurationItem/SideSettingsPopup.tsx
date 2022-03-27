@@ -1,7 +1,7 @@
 import { isNil, map } from 'lodash';
 import React, { useState } from 'react';
 import { SideType } from '../../../../icons/DownIcon';
-import { SideScoreType } from '../../../Content/Content';
+import { SideScoreType } from '../../../Content/Content.component';
 import { ConfigurationItemType } from '../../configuration';
 import { SliderWithTooltip } from './ConfigurationItem';
 
@@ -46,7 +46,7 @@ const SideSettingsPopup: React.FC<SideSettingsPopupProps> = ({
               <SliderWithTooltip
                 key={sideName}
                 onChange={(value) =>
-                  setLocalSideValues((prev) => ({
+                  setLocalSideValues((prev: SideScoreType) => ({
                     ...prev,
                     [sideName as SideType]: value,
                   }))

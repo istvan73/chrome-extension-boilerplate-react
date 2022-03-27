@@ -7,6 +7,8 @@ import {
   StorageItemNamspaces,
 } from '../../protocol';
 import { defaultConfiguration } from '../../storage.defaults';
+import { extractRootDomain } from '../../Shared/helpers';
+import { useDomainWhitelist } from './hooks/useDomainWhitelist';
 import InputGroup from './InputGroup';
 
 const SliderWithTooltip = createSliderWithTooltip(Slider);
@@ -40,6 +42,12 @@ const PopupContent: React.FC = () => {
       label: capitalizeFirstLetter(item),
     }))
   );
+  const [currentDomain, setCurrentDomain] = useState<string | undefined>(
+    undefined
+  );
+
+  const { isCurrentDomainWhitelisted, updateCurrentDomainStatus } =
+    useDomainWhitelist(currentDomain);
 
   const [shouldUpdateConfiguration, setShouldUpdateConfiguration] =
     useState(false);
@@ -73,6 +81,14 @@ const PopupContent: React.FC = () => {
         }
       }
     );
+
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+      let url = tabs?.[0]?.url;
+
+      if (url) {
+        setCurrentDomain(extractRootDomain(url));
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -88,6 +104,14 @@ const PopupContent: React.FC = () => {
     }
   }, [selectedSideTracker, scrollSize, sensitivity, shouldUpdateConfiguration]);
 
+  const handleActivateCheckboxChanged = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const checked = event.target.checked;
+
+    updateCurrentDomainStatus(checked);
+  };
+
   const handleSideSelection = (
     selectedOption: MultiValue<SideSelectionOption>
   ) => {
@@ -97,6 +121,19 @@ const PopupContent: React.FC = () => {
 
   return (
     <div className="content">
+      <InputGroup
+        title={`Use I-Control on this domain (${currentDomain})`}
+        singleRow
+      >
+        <div>
+          <input
+            type="checkbox"
+            onChange={handleActivateCheckboxChanged}
+            checked={isCurrentDomainWhitelisted}
+          />
+        </div>
+      </InputGroup>
+
       <InputGroup title="Percentage of screen to be scrolled">
         <SliderWithTooltip
           onAfterChange={updateConfiguration}

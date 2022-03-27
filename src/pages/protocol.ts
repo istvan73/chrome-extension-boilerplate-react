@@ -9,11 +9,13 @@ export type MessageProtocol = {
 
 export type StorageItemNamespaceType =
   | 'POPUP_CONFIGURATION'
-  | 'OPTIONS_CONFIGURATION';
+  | 'OPTIONS_CONFIGURATION'
+  | 'ALLOWED_DOMAINS';
 
 export const StorageItemNamspaces = {
   POPUP_CONFIGURATION: 'POPUP_CONFIGURATION',
   OPTIONS_CONFIGURATION: 'OPTIONS_CONFIGURATION',
+  ALLOWED_DOMAINS: 'ALLOWED_DOMAINS',
 };
 
 export type PopupConfigurationStorageItem = {

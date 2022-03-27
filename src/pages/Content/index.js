@@ -1,13 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Content from './Content';
-import { printLine } from './modules/print';
+import Content from './Content.container';
 import { initializeWebgazer } from './modules/GazingData/webgazerEntry';
-
-console.log('Content script works!');
-console.log('Must reload extension for modifications to take effect.');
-
-printLine("Using the 'printLine' function from the Print Module");
 
 initializeWebgazer();
 

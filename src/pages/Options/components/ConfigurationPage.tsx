@@ -43,7 +43,7 @@ const ConfigurationPage = () => {
     setCanSave(false);
   };
 
-  useEffect(() => {
+  const loadSavedConfig = () => {
     chrome.storage.sync.get(
       [StorageItemNamspaces.OPTIONS_CONFIGURATION],
       (items) => {
@@ -54,6 +54,10 @@ const ConfigurationPage = () => {
         !!config && setConfigurationValues(config);
       }
     );
+  };
+
+  useEffect(() => {
+    loadSavedConfig();
   }, []);
 
   return (
@@ -83,9 +87,18 @@ const ConfigurationPage = () => {
       <div>
         <button
           className={'reset-button sidebar-button'}
+          onClick={loadSavedConfig}
+        >
+          A lill reset (just a little, resetting to last saved)
+        </button>
+      </div>
+
+      <div>
+        <button
+          className={'reset-button sidebar-button'}
           onClick={handleResetConfig}
         >
-          I wanna reset
+          I wanna reset alll (resetting to base configuration)
         </button>
       </div>
     </div>

@@ -84,6 +84,20 @@ const configuration: ConfigurationType = {
     scale: 100,
     step: 0.05,
   },
+  scrollAmount: {
+    value: {
+      top: 0.25,
+      bottom: 0.25,
+      left: 0.25,
+      right: 0.25,
+    },
+    title: 'Scroll size in percentage',
+    min: 0,
+    max: 1,
+    suffix: '%',
+    scale: 100,
+    step: 0.05,
+  },
 };
 
 export default configuration;

@@ -2,7 +2,7 @@ import { isNil, map } from 'lodash';
 import Slider, { createSliderWithTooltip } from 'rc-slider';
 import React, { useState } from 'react';
 import SettingsIcon from '../../../../icons/SettingsIcon';
-import { SideScoreType } from '../../../Content/Content';
+import { SideScoreType } from '../../../Content/Content.component';
 import { ConfigurationItemType } from '../../configuration';
 import SideSettingsPopup from './SideSettingsPopup';
 import './style.scss';
