@@ -20,8 +20,6 @@ export const StorageItemNamspaces = {
 
 export type PopupConfigurationStorageItem = {
   selectedSides: string[];
-  scrollSize: number;
-  sensitivity: number;
 };
 
 export type OptionsConfigurationStorage = {

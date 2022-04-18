@@ -98,6 +98,23 @@ const configuration: ConfigurationType = {
     scale: 100,
     step: 0.05,
   },
+  smoothenScroll: {
+    value: false,
+    title: 'Applies smooth scrolling',
+  },
+  showVideo: {
+    value: false,
+    title: 'Show Video with cool facemask (reload required)',
+  },
+  showGazeIndicator: {
+    value: false,
+    title:
+      'Show gaze indicator red dot (reload required, might be a bit buggy)',
+  },
+  saveTrainedModelBetweenPages: {
+    value: false,
+    title: 'Save the WebGazer.js trained model between pages',
+  },
 };
 
 export default configuration;

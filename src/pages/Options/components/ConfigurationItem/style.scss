@@ -3,7 +3,8 @@
   border-bottom: 1px solid rgb(204, 204, 204);
   padding-top: 12px;
   padding-bottom: 12px;
-  width: 900px;
+  margin-right: 12px;
+  width: calc(100vw - 360px);
   justify-content: space-between;
   align-items: center;
 
@@ -42,32 +43,8 @@
   }
 }
 
-.side-settings-popup-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(150, 150, 150, 0.308);
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 500;
-
-  .side-settings-popup-component {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-    width: 400px;
-    height: 400px;
-    border-radius: 15px;
-    background-color: rgb(245, 245, 245);
-
-    .side-setting-title {
-      font-size: 14px;
-    }
-
+.general-popup-container {
+  .general-popup-component {
     .side-setting-item {
       display: flex;
       align-items: center;

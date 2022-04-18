@@ -30,10 +30,6 @@ const PopupContent: React.FC = () => {
     { value: 'right', label: 'Right' },
   ];
 
-  const [scrollSize, setScrollSize] = useState(defaultConfiguration.scrollSize);
-  const [sensitivity, setSensitivity] = useState(
-    defaultConfiguration.sensitivity
-  );
   const [selectedSides, setSelectedSides] = useState<
     MultiValue<SideSelectionOption> | undefined
   >(
@@ -70,8 +66,6 @@ const PopupContent: React.FC = () => {
         ] as PopupConfigurationStorageItem;
 
         if (!!configuration) {
-          setScrollSize(configuration.scrollSize);
-          setSensitivity(configuration.sensitivity);
           setSelectedSides(
             map(configuration.selectedSides, (item) => ({
               value: item,
@@ -96,13 +90,11 @@ const PopupContent: React.FC = () => {
       chrome.storage.sync.set({
         [StorageItemNamspaces.POPUP_CONFIGURATION]: {
           selectedSides: map(selectedSides, (side) => side.value),
-          scrollSize,
-          sensitivity,
         },
       });
       setShouldUpdateConfiguration(false);
     }
-  }, [selectedSideTracker, scrollSize, sensitivity, shouldUpdateConfiguration]);
+  }, [selectedSideTracker, shouldUpdateConfiguration]);
 
   const handleActivateCheckboxChanged = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -132,31 +124,6 @@ const PopupContent: React.FC = () => {
             checked={isCurrentDomainWhitelisted}
           />
         </div>
-      </InputGroup>
-
-      <InputGroup title="Percentage of screen to be scrolled">
-        <SliderWithTooltip
-          onAfterChange={updateConfiguration}
-          tipFormatter={(value) => {
-            return `${value}%`;
-          }}
-          value={scrollSize}
-          onChange={setScrollSize}
-          trackStyle={{ backgroundColor: 'rgb(255, 150, 102)' }}
-          handleStyle={{ borderColor: 'rgb(255, 150, 102)' }}
-        />
-      </InputGroup>
-      <InputGroup title="Sensitivity of algorithm">
-        <SliderWithTooltip
-          onAfterChange={updateConfiguration}
-          tipFormatter={(value) => {
-            return `${value}%`;
-          }}
-          value={sensitivity}
-          onChange={setSensitivity}
-          trackStyle={{ backgroundColor: 'rgb(255, 150, 102)' }}
-          handleStyle={{ borderColor: 'rgb(255, 150, 102)' }}
-        />
       </InputGroup>
       <InputGroup title="Sides with i-control">
         <div className="input-group-control multi-select-control">

@@ -1,0 +1,27 @@
+.general-popup-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(150, 150, 150, 0.308);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 500;
+
+  .general-popup-component {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 400px;
+    height: 400px;
+    border-radius: 15px;
+    background-color: rgb(245, 245, 245);
+
+    .general-title {
+      font-size: 14px;
+    }
+  }
+}

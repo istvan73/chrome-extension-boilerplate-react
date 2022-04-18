@@ -1,4 +1,4 @@
-import { map, mapValues, reduce } from 'lodash';
+import { map, mapValues, reduce, transform } from 'lodash';
 import { SideType } from '../../../../icons/DownIcon';
 import { getConfig } from '../configurationProvider';
 
@@ -195,8 +195,13 @@ export const calculateSideGazeScores = (coordinates: number[]) => {
       }
     }
 
-    return mapValues(gazePredictionScores, (gazePrediction) =>
-      (gazePrediction / 10).toFixed()
+    return transform(
+      gazePredictionScores,
+      (row: { [side: string]: string }, gazePrediction, key) =>
+        (row[key] = (
+          (gazePrediction / getConfig().intensityThresholds[key as SideType]) *
+          100
+        ).toFixed())
     );
   }
 };

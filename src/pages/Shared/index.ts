@@ -1,0 +1,1 @@
+export { GeneralPopup } from './GeneralPopup';

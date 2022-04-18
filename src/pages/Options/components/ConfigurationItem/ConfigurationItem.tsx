@@ -57,7 +57,13 @@ const ConfigurationItem: React.FC<ConfigurationItemProps> = ({
           />
         );
       case 'boolean':
-        return <input type="checkbox" checked={fields} />;
+        return (
+          <input
+            type="checkbox"
+            checked={fields}
+            onClick={() => handleChange(!fields)}
+          />
+        );
       default:
         return (
           <>

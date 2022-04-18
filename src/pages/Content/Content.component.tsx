@@ -8,8 +8,9 @@ import {
 import { SideType } from '../../icons/DownIcon';
 
 import './Content.scss';
-import TrainingComponent from './TrainingComponent';
+import TrainingComponent from './components/TrainingScreen/TrainingComponent';
 import GeneralScrollControl from './components/GeneralScrollControl';
+import { TrainingScreen } from './components/TrainingScreen';
 
 export type SideScoreType = {
   top: number;
@@ -23,15 +24,6 @@ const Content = () => {
   const [configuration, setConfiguration] = useState<
     PopupConfigurationStorageItem | undefined
   >();
-
-  // const gazePredictions = useSidegazePredictions();
-
-  // const sidePercentages = {
-  //   top: 85,
-  //   bottom: gazePredictions.bottomGazeScore,
-  //   left: 5,
-  //   right: 40,
-  // };
 
   const [sidePercentages, setSidePercentages] = useState<SideScoreType>({
     top: 0,
@@ -67,7 +59,7 @@ const Content = () => {
           case 'SET_CONFIGURATION':
             break;
           case 'START_ALGO_TRAIN':
-            setIsTrainingOn(true);
+            setIsTrainingOn(message.payload);
             break;
 
           default:
@@ -93,7 +85,7 @@ const Content = () => {
     <div className="i-control-root">
       {isTrainingOn && (
         <div className="i-control-content">
-          <TrainingComponent />
+          <TrainingScreen />
         </div>
       )}
       {map(configuration?.selectedSides, (side) => {

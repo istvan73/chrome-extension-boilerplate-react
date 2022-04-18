@@ -63,15 +63,17 @@ const ConfigurationPage = () => {
   return (
     <div className="configuration-container">
       <h2>Configurations</h2>
-      {map(configuration, (configurationItem, key) => (
-        <ConfigurationItem
-          {...configurationItem}
-          key={key}
-          fields={configurationValues[key]}
-          id={key}
-          onChange={handleConfigChange}
-        />
-      ))}
+      <div className="configuration-items-container">
+        {map(configuration, (configurationItem, key) => (
+          <ConfigurationItem
+            {...configurationItem}
+            key={key}
+            fields={configurationValues[key]}
+            id={key}
+            onChange={handleConfigChange}
+          />
+        ))}
+      </div>
       <div>
         <button
           className={

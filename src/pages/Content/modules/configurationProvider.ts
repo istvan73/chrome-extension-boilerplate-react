@@ -14,6 +14,10 @@ export type ConfigurationModel = {
   gazeCoordinateBulkingLimit: number;
   sidegazeDistinctionCoefficient: SideScoreType;
   scrollAmount: SideScoreType;
+  smoothenScroll: boolean;
+  showVideo: boolean;
+  showGazeIndicator: boolean;
+  saveTrainedModelBetweenPages: boolean;
 };
 
 let configurationValues = mapValues(configuration, ({ value }) => value);

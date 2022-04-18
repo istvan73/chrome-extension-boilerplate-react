@@ -1,11 +1,12 @@
-import { webgazer } from './webgazer2';
 import { calculateSideGazeScores } from './sidegazeCalculator';
 import { getConfig } from '../configurationProvider';
 import { StorageItemNamspaces } from '../../../protocol';
 import { extractRootDomain } from '../../../Shared/helpers';
+import { Webgazer } from './webgazer.types';
 
 let isWebgazerRunning = false;
 let shouldWebgazerBeRunning = false;
+const defaultScrollBehaviour = document.documentElement.style.scrollBehavior;
 
 let bulkedGazeData = [];
 const getBulkedCoordinates = (gazeDataset) => {
@@ -41,6 +42,16 @@ export const initializeWebgazer = () => {
   });
 
   setInterval(() => {
+    const l50 = Webgazer.getStoredPoints();
+    console.log({ l50 });
+    if (getConfig().smoothenScroll) {
+      document.documentElement.style.scrollBehavior = 'smooth';
+    } else {
+      document.documentElement.style.scrollBehavior = defaultScrollBehaviour;
+    }
+    Webgazer.showPredictionPoints(getConfig().showGazeIndicator);
+    Webgazer.showVideoPreview(getConfig().showVideo);
+
     if (shouldWebgazerBeRunning && !isWebgazerRunning) {
       isWebgazerRunning = true;
       addWebgazer();
@@ -53,7 +64,7 @@ export const initializeWebgazer = () => {
   }, 1000);
 };
 
-webgazer.setGazeListener(function (data, time) {
+Webgazer.setGazeListener(function (data) {
   if (!data) {
     return;
   }
@@ -79,14 +90,25 @@ webgazer.setGazeListener(function (data, time) {
 });
 
 const addWebgazer = () => {
-  webgazer.showVideoPreview(true).showPredictionPoints(true);
+  Webgazer.showVideoPreview(true).showPredictionPoints(true);
 
-  webgazer.begin();
+  Webgazer.begin();
 };
 
 const removeWebgazer = () => {
-  webgazer.showVideoPreview(false).showPredictionPoints(false);
+  Webgazer.showVideoPreview(false).showPredictionPoints(false);
   // webgazer.clearGazeListener();
-  webgazer.end();
+  Webgazer.end();
   // document.getElementById('webgazerVideoContainer').remove();
 };
+
+
+
+
+// ? Sooo, cool thing about localForage usage in WebGazer.
+
+// ? It uses localForage to save each new click event positon. It does a regresssion based on those click events in real time,
+// ? as well as the position of the eye. It saves into the localForage then the global data, the regression. 
+
+// ! We must limit the amount of data.
+// ! The localForage should be replacable with the Chrome api

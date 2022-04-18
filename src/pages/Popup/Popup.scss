@@ -33,7 +33,7 @@
     padding: 8px;
     width: calc(100% - 32px);
 
-    .lets-train-button {
+    .popup-button {
       display: inline-block;
       padding: 0.4em 1.2em;
       margin: 0 0.1em 0.1em 0;
@@ -57,6 +57,18 @@
       &:active {
         box-shadow: 0px 0px 2px 1px rgb(155, 155, 155);
         background-color: #ffb08b;
+      }
+    }
+
+    .cancel-button {
+      background-color: #ebebeb;
+      margin-left: 16px;
+
+      &:hover {
+        background-color: #dadada;
+      }
+      &:active {
+        background-color: #cecece;
       }
     }
   }
