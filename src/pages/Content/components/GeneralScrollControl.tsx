@@ -36,7 +36,6 @@ const GeneralScrollControl: React.FC<ScrollDownControlType> = ({
     hasScrollOccurred && percent < 100 && setHasScrollOccurred(false);
   }, [percent, hasScrollOccurred]);
 
-  // console.log({ side, percent });
   return (
     <div
       style={{

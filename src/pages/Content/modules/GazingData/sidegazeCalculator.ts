@@ -183,14 +183,12 @@ export const calculateSideGazeScores = (coordinates: number[]) => {
         gazePredictionResetTimouts[key as SideType] === undefined
       ) {
         isSideLocked[key as SideType] = true;
-        console.log({ msg: 'locking', side: key });
 
         // *We are resetting it in n seconds
         gazePredictionResetTimouts[key as SideType] = setTimeout(() => {
           isSideLocked[key as SideType] = false;
           gazePredictionScores[key] = 0;
           gazePredictionResetTimouts[key as SideType] = undefined;
-          console.log({ msg: 'resetting', side: key });
         }, getConfig().cooldownTimeMs);
       }
     }

@@ -35,15 +35,12 @@ export const initializeWebgazer = () => {
   chrome.storage.onChanged.addListener((changes) => {
     const nextAllowedDomains =
       changes[StorageItemNamspaces.ALLOWED_DOMAINS].newValue;
-    console.log({ nextAllowedDomains, currentDomain });
     if (nextAllowedDomains && currentDomain) {
       shouldWebgazerBeRunning = nextAllowedDomains[currentDomain];
     }
   });
 
   setInterval(() => {
-    const l50 = Webgazer.getStoredPoints();
-    console.log({ l50 });
     if (getConfig().smoothenScroll) {
       document.documentElement.style.scrollBehavior = 'smooth';
     } else {
@@ -102,13 +99,10 @@ const removeWebgazer = () => {
   // document.getElementById('webgazerVideoContainer').remove();
 };
 
-
-
-
 // ? Sooo, cool thing about localForage usage in WebGazer.
 
 // ? It uses localForage to save each new click event positon. It does a regresssion based on those click events in real time,
-// ? as well as the position of the eye. It saves into the localForage then the global data, the regression. 
+// ? as well as the position of the eye. It saves into the localForage then the global data, the regression.
 
 // ! We must limit the amount of data.
 // ! The localForage should be replacable with the Chrome api

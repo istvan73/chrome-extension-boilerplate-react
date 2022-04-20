@@ -43,7 +43,6 @@ chrome.storage.sync.get(
     ] as OptionsConfigurationStorage;
 
     configurationValues = newConfig;
-    console.log({ newConfig });
   }
 );
 

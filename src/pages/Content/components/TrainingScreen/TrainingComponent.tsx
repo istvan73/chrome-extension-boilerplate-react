@@ -1,8 +1,14 @@
 import { Line } from 'rc-progress';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ClickableTarget from './ClickableTarget';
 
-const TrainingComponent: React.FC = () => {
+type TrainingComponentProps = {
+  finishTraining: () => void;
+};
+
+const TrainingComponent: React.FC<TrainingComponentProps> = ({
+  finishTraining,
+}) => {
   const targets = [
     { xCoord: 1, yCoord: 1 },
     { xCoord: 25, yCoord: 1 },
@@ -28,6 +34,10 @@ const TrainingComponent: React.FC = () => {
 
   const goToNextPosition = () =>
     setTargetPositionIndex((currentIndex) => currentIndex + 1);
+
+  useEffect(() => {
+    targetPositionIndex >= targets.length && finishTraining();
+  }, [targetPositionIndex]);
 
   return (
     <div

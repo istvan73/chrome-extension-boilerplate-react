@@ -33,7 +33,7 @@ export const getStylePerSide = (side: SideType, percent: number) => {
 };
 
 export const getScrollAmountPerSide = (side: SideType): number[] => {
-  console.log(getConfig());
+
   const scrollCoefficient = getConfig().scrollAmount[side];
 
   switch (side) {
