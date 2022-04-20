@@ -42,7 +42,16 @@ chrome.storage.sync.get(
       StorageItemNamspaces.OPTIONS_CONFIGURATION
     ] as OptionsConfigurationStorage;
 
-    configurationValues = newConfig;
+    if (!!newConfig) {
+      configurationValues = newConfig;
+    } else {
+      const defaultConfig = mapValues(configuration, ({ value }) => value);
+      configurationValues = defaultConfig;
+
+      chrome.storage.sync.set({
+        [StorageItemNamspaces.OPTIONS_CONFIGURATION]: defaultConfig,
+      });
+    }
   }
 );
 
